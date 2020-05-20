@@ -6,8 +6,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import textProcessor.textProcessor;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import textProcessor.textProcessor;
 
 public class movieDescriptionCrawler {
 	
@@ -34,7 +38,7 @@ public class movieDescriptionCrawler {
 				  .get();
 		
 	  title	= doc.title();
-	
+	  title = splitTitle(title);
 		
 	  //Elements paragraphs = doc.select("p");
 	  try {
@@ -44,10 +48,7 @@ public class movieDescriptionCrawler {
 		extra_movie_text = doc.getElementById("makingnotePhase");
 		country = doc.select("a[href*=/movie/sdb/browsing/bmovie.nhn?nation=]");
 		genre = doc.select("a[href*=/movie/sdb/browsing/bmovie.nhn?genre=]");
-
 		
-		
-		year = doc.select("a[href*=/movie/sdb/browsing/bmovie.nhn?open=]");
 		
 	  }
 	  catch (Exception e) {
@@ -58,37 +59,42 @@ public class movieDescriptionCrawler {
 		
 		
 		System.out.println("title " + title);
-		System.out.println("movie_title: " + movie_title);
-		System.out.println("movie description: " + movie_text.get(0).text());
+		System.out.println("movie_title: " + cleanText(movie_title));
+		System.out.println("movie description: " + cleanText(movie_text.first().text()));
 		
-		if (extra_movie_text != null   ) {
-			System.out.println("extra movie text: " + extra_movie_text.text());
-			
-		}
-		else {
-			extra_movie_text = null;
-			
-		}
+				if (extra_movie_text != null   ) {
+					System.out.println("extra movie text: " + cleanText(extra_movie_text.text()));
+					
+				}
+				else {
+					extra_movie_text = null;
+					
+				}
 		
-		System.out.println("country: " + country.get(0).text());
-		System.out.println("Genre: " + genre.get(0).text());
-		System.out.println("year: " + year.text());
+		System.out.println("country: " +  cleanText(country.first().text()));
+		System.out.println("Genre: " +  cleanText(genre.first().text()));
+		
 		System.out.println("============");
+		
+		// Hash Map
+		
 		movie_data = new HashMap<String, String>();
 		movie_data.put("id", Integer.toString(id));
-		movie_data.put("title", title);
-		movie_data.put("movie_title", movie_title);
-		movie_data.put("movie_text", movie_text.text());
+		movie_data.put("title", cleanText(title));
+		movie_data.put("movie_title", cleanText(movie_title));
+		movie_data.put("movie_text", cleanText(movie_text.first().text()));
 		if ( extra_movie_text != null  ) {
-			movie_data.put("extra_movie_text", extra_movie_text.text());
+			movie_data.put("extra_movie_text", cleanText(extra_movie_text.text()));
 		}
 		else {
 			movie_data.put("extra_movie_text", null);
 		}
 		
-		movie_data.put("country", country.text());
-		movie_data.put("genre", genre.text());
-		movie_data.put("year", year.text());
+		movie_data.put("country", cleanText(country.first().text()) );
+		movie_data.put("genre", cleanText(genre.first().text()));
+		
+		
+		
 		
 		
 		
@@ -112,29 +118,22 @@ public class movieDescriptionCrawler {
 	}
 	
 	
-	public String getHeadline() throws IOException {
-		System.out.println(title);
+	public String cleanText(String string) {
+		string =string.trim().replaceAll("[♪/‘’'!?;]","");
+		string = new textProcessor().remove_extra_spaces(string);
 		
-		for (Element headline : movie_text) {
-			
-			System.out.printf("%s\n\t%s",  headline.attr("title"), headline.text()); 
-			
-		}
+		return string;
 		
-		return movie_text.text();
 		
 	}
 	
-	/*
-	
-	@Override
-	public String toString() {
-		return "Crawler [doc=" + doc + ", newsHeadlines=" + newsHeadlines + ", headline=" + headline + "]";
+	public String splitTitle(String string) {
+		String[] string_arr = cleanText(string).split(":",2 );
+		
+		
+		return string_arr[0];
+		
 	}
-	
-	public void setHeadline(Element headline) {
-		this.headline = headline;
-	}
-	*/
+
 	
 }
