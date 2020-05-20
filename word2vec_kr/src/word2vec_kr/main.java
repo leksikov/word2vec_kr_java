@@ -10,6 +10,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import crawler.movieDescriptionCrawler;
+import crawler.runCrawler;
 /**
  * @author lexik
  *
@@ -26,8 +27,13 @@ public class main {
 		movieDescriptionCrawler cr = new movieDescriptionCrawler(193804);
 		//System.out.println(cr.getHeadline());
 		
+		runCrawler run = new runCrawler();
+		
+		
 		
 	}
+
+
 
 
 }

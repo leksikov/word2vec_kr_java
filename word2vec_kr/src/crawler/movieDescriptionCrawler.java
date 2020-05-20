@@ -7,7 +7,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 
 public class movieDescriptionCrawler {
 	
@@ -24,7 +24,7 @@ public class movieDescriptionCrawler {
 
 	Elements year;
 	
-	
+	HashMap<String, String> movie_data ;
 	public movieDescriptionCrawler(int id) throws IOException {
 		articles = new ArrayList<String>();
 		
@@ -34,10 +34,11 @@ public class movieDescriptionCrawler {
 				  .get();
 		
 	  title	= doc.title();
-	  
+	
 		
 	  //Elements paragraphs = doc.select("p");
-	  
+	  try {
+		  
 	  	movie_title = doc.getElementsByClass("h_movie2").attr("title");
 		movie_text = doc.getElementsByClass("con_tx"); //
 		extra_movie_text = doc.getElementById("makingnotePhase");
@@ -48,33 +49,49 @@ public class movieDescriptionCrawler {
 		
 		year = doc.select("a[href*=/movie/sdb/browsing/bmovie.nhn?open=]");
 		
-		
-		/*
-				#content > div.article > div.mv_info_area > div.mv_info > dl > dd:nth-child(2) > p > span:nth-child(2) > a > font > font
-				<font style="vertical-align: inherit;">Spain</font>
-				
-				href="/movie/sdb/browsing/bmovie.nhn?nation="
-						+ ""
-						+ ""
-			*/
+	  }
+	  catch (Exception e) {
+		  System.out.println("error: "  + e);
+	  }
+	
 	if (movie_text.hasText() !=  false) {
 		
 		
 		System.out.println("title " + title);
 		System.out.println("movie_title: " + movie_title);
-		System.out.println("movie description: " + movie_text.text());
-		//System.out.println("extra movie text: " + extra_movie_text);
-		System.out.println("country: " + country.text());
-		System.out.println("Genre: " + genre.text());
-		System.out.println("year: " + year.text());
+		System.out.println("movie description: " + movie_text.get(0).text());
 		
-		/*
-		for (Element headline : newsHeadlines) {
-			
-			System.out.printf("%s\n\t%s",  headline.attr("title"), headline.text()); 
+		if (extra_movie_text != null   ) {
+			System.out.println("extra movie text: " + extra_movie_text.text());
 			
 		}
-		*/
+		else {
+			extra_movie_text = null;
+			
+		}
+		
+		System.out.println("country: " + country.get(0).text());
+		System.out.println("Genre: " + genre.get(0).text());
+		System.out.println("year: " + year.text());
+		System.out.println("============");
+		movie_data = new HashMap<String, String>();
+		movie_data.put("id", Integer.toString(id));
+		movie_data.put("title", title);
+		movie_data.put("movie_title", movie_title);
+		movie_data.put("movie_text", movie_text.text());
+		if ( extra_movie_text != null  ) {
+			movie_data.put("extra_movie_text", extra_movie_text.text());
+		}
+		else {
+			movie_data.put("extra_movie_text", null);
+		}
+		
+		movie_data.put("country", country.text());
+		movie_data.put("genre", genre.text());
+		movie_data.put("year", year.text());
+		
+		
+		
 		
 	}
 	
@@ -84,6 +101,16 @@ public class movieDescriptionCrawler {
 		
 		
 	}
+	
+
+	public HashMap<String, String> getData() throws IOException {
+		
+		
+		return movie_data;
+		
+		
+	}
+	
 	
 	public String getHeadline() throws IOException {
 		System.out.println(title);
