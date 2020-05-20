@@ -9,7 +9,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import crawler.Crawler;
+import crawler.movieDescriptionCrawler;
 /**
  * @author lexik
  *
@@ -23,8 +23,8 @@ public class main {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		System.out.println("Hello word2vec");
-		Crawler cr = new Crawler();
-		System.out.println(cr.getHeadline());
+		movieDescriptionCrawler cr = new movieDescriptionCrawler(193804);
+		//System.out.println(cr.getHeadline());
 		
 		
 	}
