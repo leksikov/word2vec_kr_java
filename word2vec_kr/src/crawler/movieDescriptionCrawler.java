@@ -57,7 +57,7 @@ public class movieDescriptionCrawler {
 	
 	if (movie_text.hasText() !=  false) {
 		
-		
+		/*
 		System.out.println("title " + title);
 		System.out.println("movie_title: " + cleanText(movie_title));
 		System.out.println("movie description: " + cleanText(movie_text.first().text()));
@@ -75,7 +75,7 @@ public class movieDescriptionCrawler {
 		System.out.println("Genre: " +  cleanText(genre.first().text()));
 		
 		System.out.println("============");
-		
+		*/
 		// Hash Map
 		
 	

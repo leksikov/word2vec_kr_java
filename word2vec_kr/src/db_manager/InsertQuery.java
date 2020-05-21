@@ -35,30 +35,26 @@ public class InsertQuery {
 	             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 				System.out.println("Insertion");
 				 int i = 1;
-			  for (String name : data.keySet()) {
-				  
-				  if (name=="idx") {
-					  
-					  int value = Integer.parseInt(data.get(name));
-			    	  pstmt.setInt(i, value);
-				      i++; 
-				  }
-				  else {
-					  //System.out.println("name: " + name + " value: " + data.get(name));
-					     
-			    	  String value = data.get(name);
-			    	  pstmt.setString(i, value);
-				      i++; 
-				  }
-				  
-			     
-			      }
-			     
-			      
-			      
+				 System.out.println(data);
+				 
+				 
+			  
+				 if ( data.size()!=0) {
+					  pstmt.setInt(1, Integer.parseInt(data.get("idx")));			   
+			    	  pstmt.setString(2, data.get("title"));
+			    	  pstmt.setString(3, data.get("movie_title"));
+			    	  pstmt.setString(4, data.get("movie_text"));
+			    	  pstmt.setString(5, data.get("extra_movie_text"));
+			    	  pstmt.setString(6, data.get("genre"));
+			    	  pstmt.setString(7, data.get("country"));
+			    	  
 		            
 		         int row =  pstmt.executeUpdate();
 		         System.out.println(row); //1
+					 
+				 }
+					  
+			    	
 			    }
 			  
 	            
