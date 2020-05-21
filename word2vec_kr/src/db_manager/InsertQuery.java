@@ -57,7 +57,7 @@ public class InsertQuery {
 			    	  pstmt.setString(9, timestamp.toString());
 			    	  
 		         int row =  pstmt.executeUpdate();
-		         System.out.println(row); //1
+		         //System.out.println(row); //1
 					 
 				 }
 					  

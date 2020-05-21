@@ -84,16 +84,17 @@ public class movieDescriptionCrawler {
 		this.movie_data.put("idx", Integer.toString(idx));
 		this.movie_data.put("title", cleanText(title));
 		this.movie_data.put("movie_title", cleanText(movie_title));
-		this.movie_data.put("movie_text", cleanText(movie_text.first().text().replaceAll("[a-zA-Z0-9]", "")));
+		this.movie_data.put("movie_text", cleanText(movie_text.first().text().replaceAll("[\\[\\](){}]","").replaceAll("[a-zA-Z0-9]", "")));
 		
 		if ( extra_movie_text != null  ) {
-			this.movie_data.put("extra_movie_text", cleanText(extra_movie_text.text().replaceAll("[a-zA-Z0-9]", ""))); //.replaceAll("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", "")
+			this.movie_data.put("extra_movie_text", cleanText(extra_movie_text.text().replaceAll("[\\[\\](){}]","").replaceAll("[a-zA-Z0-9]", ""))); //.replaceAll("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", "")
 		}
 		else {
 			this.movie_data.put("extra_movie_text", null);
 		}
 		
 		this.movie_data.put("country", cleanText(country.first().text()) );
+		
 		this.movie_data.put("genre", cleanText(genre.first().text()));
 		this.movie_data.put("html", html.html());
 		
