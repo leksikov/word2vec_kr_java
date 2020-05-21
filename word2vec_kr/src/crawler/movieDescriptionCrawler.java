@@ -82,9 +82,9 @@ public class movieDescriptionCrawler {
 		movie_data.put("id", Integer.toString(id));
 		movie_data.put("title", cleanText(title));
 		movie_data.put("movie_title", cleanText(movie_title));
-		movie_data.put("movie_text", cleanText(movie_text.first().text()));
+		movie_data.put("movie_text", cleanText(movie_text.first().text().replaceAll("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", "")));
 		if ( extra_movie_text != null  ) {
-			movie_data.put("extra_movie_text", cleanText(extra_movie_text.text()));
+			movie_data.put("extra_movie_text", cleanText(extra_movie_text.text().replaceAll("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", "")));
 		}
 		else {
 			movie_data.put("extra_movie_text", null);
@@ -119,7 +119,7 @@ public class movieDescriptionCrawler {
 	
 	
 	public String cleanText(String string) {
-		string =string.trim().replaceAll("[♪/‘’'!?;]","");
+		string =string.trim().replaceAll("[♪/‘’'!?;:^*()<>+_@%#]","");
 		string = new textProcessor().remove_extra_spaces(string);
 		
 		return string;

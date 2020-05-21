@@ -1,7 +1,9 @@
 package db_manager;
 // https://www.sqlitetutorial.net/download-install-sqlite/
+// https://www.sqlitetutorial.net/sqlite-java/create-database/
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -33,7 +35,22 @@ import java.sql.SQLException;
 	            }
 	        }
 	    }
+	    
+	    public static void createNewDatabase(String fileName) {
 
+	        String url = "jdbc:sqlite:C:/sqlite/db/" + fileName;
+
+	        try (Connection conn = DriverManager.getConnection(url)) {
+	            if (conn != null) {
+	                DatabaseMetaData meta = conn.getMetaData();
+	                System.out.println("The driver name is " + meta.getDriverName());
+	                System.out.println("A new database has been created.");
+	            }
+
+	        } catch (SQLException e) {
+	            System.out.println(e.getMessage());
+	        }
+	    }
 	
 	/*
 	public void insertToDB(arr) {
