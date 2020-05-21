@@ -2,6 +2,7 @@ package db_manager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -48,11 +49,11 @@ public class DBQuery {
             // loop through the result set
             while (rs.next()) {
             	
-            	qres = rs.getInt("idx") +  "\t" + 
-                        rs.getString("title") + "\t" +
-                        rs.getString("movie_title") + "\t" +
-                        rs.getString("movie_text") + "\t" +
-                        rs.getString("extra_movie_text") + "\t" +
+            	qres = rs.getInt("idx") +  "," + 
+                        rs.getString("title") + "," +
+                        rs.getString("movie_title") + "," +
+                        rs.getString("movie_text") + "," +
+                        rs.getString("extra_movie_text") + "," +
                         rs.getString("genre");
             	
                 System.out.println(qres);
@@ -68,6 +69,18 @@ public class DBQuery {
 			}
         }
     return qres;
+    }
+    
+    public void insert(Connection conn, String name, double capacity) {
+        String sql = "INSERT INTO warehouses(name,capacity) VALUES(?,?)";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, name);
+            pstmt.setDouble(2, capacity);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }

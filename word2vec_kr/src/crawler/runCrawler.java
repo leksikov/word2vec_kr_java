@@ -3,8 +3,10 @@ package crawler;
 import java.io.IOException;
 
 import db_manager.DBQuery;
+import db_manager.InsertQuery;
 
 import java.sql.Connection;
+import java.util.HashMap;
 
 
 public class runCrawler {
@@ -19,22 +21,21 @@ public class runCrawler {
 		
 		for (id=100000; id <= end_id; id++) {
 			movieDescriptionCrawler cr = new movieDescriptionCrawler(id);
+			
+			HashMap<String, String> data = cr.getData();
+			new InsertQuery().insert(db_path, data);
+			
+			
+			
+			/*
+			 * Get querry daa
 			String sql = "SELECT * FROM movie_description;";
+			
 			DBQuery q = new DBQuery(db_path, sql);
 			String qres = q.qres;
-			System.out.println("here "+qres );
-			
-				
-			
-			
-			
-			/* arrList = cr.getData();
-			
-			
-			insertToDB(arrList);
-			
+			System.out.println("here " + qres );
 			*/
-			
+
 		}
 		
 	}
