@@ -20,12 +20,17 @@ public class runCrawler {
 		
 		
 		for (id=100000; id <= end_id; id++) {
+			
 			movieDescriptionCrawler cr = new movieDescriptionCrawler(id);
 			
 			HashMap<String, String> data = cr.getData();
 			//System.out.println("data size "+data);
+			long startTime = System.currentTimeMillis();
+			
 			
 			new InsertQuery().insert(db_path, data);
+			long stopTime = System.currentTimeMillis();
+			System.out.println("time: " + (stopTime - startTime));
 			
 			
 			
