@@ -23,7 +23,10 @@ public class runCrawler {
 			movieDescriptionCrawler cr = new movieDescriptionCrawler(id);
 			
 			HashMap<String, String> data = cr.getData();
+			//System.out.println("data size "+data);
+			
 			new InsertQuery().insert(db_path, data);
+			
 			
 			
 			

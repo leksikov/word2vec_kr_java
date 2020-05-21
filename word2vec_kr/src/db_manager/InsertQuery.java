@@ -25,28 +25,42 @@ public class InsertQuery {
 	    }
 	 
 	 public void insert(String db_path, HashMap<String, String> data) {
-	        String sql = "INSERT INTO movies_description(idx,title, movie_title, movie_text, extra_movie_text, genre) VALUES(?,?, ?, ?, ?,?)";
-
+		 	
+	        String sql = "INSERT INTO movie_description(idx,title, movie_title, movie_text, extra_movie_text, genre, country) VALUES(?,?, ?, ?, ?,?, ?)";
+	        
+	        
 	        
 			try (Connection conn = this.connect(db_path);
 	        		
 	             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				System.out.println("Insertion");
 				 int i = 1;
-				  for (String name : data.keySet()) {
-				      System.out.println("name: " + name + " value: " + data.get(name));
-				     
-				    	  String value = data.get(name);
-				    	  pstmt.setString(i, name);
-					      i++; 
-				      }
-				     
-				      
-				      
-			            
-			          pstmt.executeUpdate();
-			            
-				    }
+			  for (String name : data.keySet()) {
 				  
+				  if (name=="idx") {
+					  
+					  int value = Integer.parseInt(data.get(name));
+			    	  pstmt.setInt(i, value);
+				      i++; 
+				  }
+				  else {
+					  //System.out.println("name: " + name + " value: " + data.get(name));
+					     
+			    	  String value = data.get(name);
+			    	  pstmt.setString(i, value);
+				      i++; 
+				  }
+				  
+			     
+			      }
+			     
+			      
+			      
+		            
+		         int row =  pstmt.executeUpdate();
+		         System.out.println(row); //1
+			    }
+			  
 	            
 	            
 	            
