@@ -16,7 +16,7 @@ public class runCrawler {
 	
 	public runCrawler() throws IOException {
 		
-		end_id = 110000; 
+		end_id = 150000; 
 		
 		
 		for (id=100000; id <= end_id; id++) {

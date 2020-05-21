@@ -35,7 +35,7 @@ public class InsertQuery {
 			try (Connection conn = this.connect(db_path);
 	        		
 	             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-				System.out.println("Insertion");
+				//System.out.println("Insertion");
 				 int i = 1;
 				 //System.out.println(data);
 				 
