@@ -6,18 +6,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class DBQuery {
 	public Connection conn = null;
 	public String qres;
-	public String db_path = "C:/sqlite/db/movie_description_small.db";
+	public String db_path = "C:/sqlite/db/movie_description.db";
 	
-	public DBQuery(String db_path, String sql) {
-			
-			conn = connect(db_path);
-			
-			selectAll(conn, sql);
-			
+	public void DBQuery() {
+	
         
 	}
 	
@@ -35,10 +32,7 @@ public class DBQuery {
     }
 
     
-    /**
-     * select all rows in the warehouses table
-     * @return 
-     */
+
     public String selectAll(Connection conn,String sql){
     	System.out.println("query");
         
@@ -70,6 +64,67 @@ public class DBQuery {
 			}
         }
     return qres;
+    }
+    
+    
+    
+    public ArrayList<String> getMovieText(String sql){
+    	
+        
+    	ArrayList<String> movie_text_lst = new ArrayList<String>();
+    	
+        try (
+        		Connection conn = this.connect(db_path);
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+            
+            // loop through the result set
+            while (rs.next()) {
+            	
+            	movie_text_lst.add(rs.getString("movie_text"));
+            	
+            }
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            try {
+				conn.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+        }
+    return movie_text_lst;
+    }
+    
+    
+    
+    public ArrayList<String> getExtraMovieText(String sql){
+    	
+        
+    	ArrayList<String> extra_movie_text_lst = new ArrayList<String>();
+    	
+        try (
+        		Connection conn = this.connect(db_path);
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+            
+            // loop through the result set
+            while (rs.next()) {
+            	extra_movie_text_lst.add(rs.getString("extra_movie_text"));
+            	
+            }
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            try {
+				conn.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+        }
+    return extra_movie_text_lst;
     }
     
     public void insert(Connection conn, String name, double capacity) {

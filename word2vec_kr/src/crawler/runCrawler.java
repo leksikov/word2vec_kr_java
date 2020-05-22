@@ -1,12 +1,8 @@
 package crawler;
 
 import java.io.IOException;
-
-import db_manager.DBQuery;
-import db_manager.InsertQuery;
-
-import java.sql.Connection;
 import java.util.HashMap;
+import db_manager.InsertQuery;
 
 
 public class runCrawler {
@@ -16,10 +12,10 @@ public class runCrawler {
 	
 	public runCrawler() throws IOException {
 		
-		end_id = 150000; 
+		end_id = 500000; 
 		
 		
-		for (id=100000; id <= end_id; id++) {
+		for (id=214530; id <= end_id; id++) {
 			try {
 				
 			movieDescriptionCrawler cr = new movieDescriptionCrawler(id);
@@ -32,13 +28,14 @@ public class runCrawler {
 				
 			
 			new InsertQuery().insert(db_path, data);
-				try {
+			/*	
+			try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			
+			*/
 			}
 			 catch (Exception e) {
 				  System.out.println("error: "  + e + " " + id);
