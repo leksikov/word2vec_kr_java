@@ -36,7 +36,7 @@ public class naverNewsCrawler {
 		url = "https://news.naver.com/main/list.nhn?mode=LSD&mid=sec&listType=title&sid1=001&date="+date2+"&page="+page;
 	doc	 = Jsoup.connect(url)
 			  .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36")
-			  .timeout(3000)
+			  .timeout(10000)
 			  .get();
 	
 	
@@ -44,7 +44,7 @@ public class naverNewsCrawler {
 	
 	textProcessor txtProcessor = new textProcessor();
 	title = txtProcessor.splitTitle(title);
-	System.out.println(title);
+	
 	
 	content = doc.getElementsByClass("list_body newsflash_body");
 	
@@ -61,11 +61,14 @@ public class naverNewsCrawler {
 		 
 		 news_data.put("date", date.toString());
 		 news_data.put("article_title", article_title);
-		 news_data.put("article_text", article_text);
 		 news_data.put("article_text", textProcessor.cleanText(article_text).replaceAll("[\\[\\](){}]","").replaceAll("[a-zA-Z0-9]", ""));
+		 
+		 String[] words = article_text.split("\\s+");
+		 news_data.put("word_count", Integer.toString(words.length));
+		 
 		 news_data.put("url", url);
 		 news_data.put("article_url", article_url);
-		 
+		
 		 
 		 
 		 
@@ -73,7 +76,7 @@ public class naverNewsCrawler {
 		}
 	 
 	 
-	System.out.println(links.get(2).text());
+
 	
 	
 	
@@ -81,20 +84,25 @@ public class naverNewsCrawler {
 
 
 	private String getArticleText(String url2) throws IOException {
+		
 		doc2	 = Jsoup.connect(url2)
 				  .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36")
-				  .timeout(3000)
+				  .timeout(10000)
 				  .get();
 		
 		String title = doc.title();
 		
 		textProcessor txtProcessor = new textProcessor();
 		title = txtProcessor.splitTitle(title);
-		System.out.println(title);
 		
-		//
-		content2 = doc.getElementById("articleBodyContents");
+		
+		content2 = doc2.getElementById("articleBodyContents");
+		
+		
+		
 		article_text = content2.text();
+		
+	
 		return article_text;
 		
 		

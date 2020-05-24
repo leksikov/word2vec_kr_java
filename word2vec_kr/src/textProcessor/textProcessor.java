@@ -41,12 +41,10 @@ public  String remove_word_duplicates(String string) {
 	}
 
 public String cleanText(String string) {
-	string =string.trim().replaceAll("[♪/‘’'!?;:^*()<>+_@%#]","");
+	string =string.trim().replaceAll("【】▶,-[♪/‘’'!?;:^*()<>+_@%#]","");
 	string = new textProcessor().remove_extra_spaces(string);
 	
 	return string;
-	
-	
 }
 
 public String splitTitle(String string) {
