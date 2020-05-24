@@ -26,9 +26,7 @@ public class main {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		System.out.println("Hello word2vec");
-		movieDescriptionCrawler cr = new movieDescriptionCrawler(193804);
-		//System.out.println(cr.getHeadline());
-		
+
 		runCrawler run = new runCrawler();
 		
 		

@@ -102,22 +102,7 @@ public class movieDescriptionCrawler {
 	}
 	
 	
-	public String cleanText(String string) {
-		string =string.trim().replaceAll("[♪/‘’'!?;:^*()<>+_@%#]","");
-		string = new textProcessor().remove_extra_spaces(string);
-		
-		return string;
-		
-		
-	}
 	
-	public String splitTitle(String string) {
-		String[] string_arr = cleanText(string).split(":",2 );
-		
-		
-		return string_arr[0];
-		
-	}
 
 	
 }

@@ -8,9 +8,9 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.HashMap;
 
-public class InsertQuery {
+public class InsertNewsQuery {
 
-	public InsertQuery() {
+	public InsertNewsQuery() {
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -28,7 +28,7 @@ public class InsertQuery {
 	 
 	 public void insert(String db_path, HashMap<String, String> data) {
 		 	
-	        String sql = "INSERT INTO movie_description(idx,title, movie_title, movie_text, extra_movie_text, genre, country, html, timestamp) VALUES(?,?, ?, ?, ?,?, ?,?,?)";
+	        String sql = "INSERT INTO naver_news( date, article_title, article_text, url, article_url, timestamp) VALUES(?,?, ?, ?, ?,?)";
 	        
 	        
 	        
@@ -42,22 +42,17 @@ public class InsertQuery {
 				 
 			  
 				 if ( data.size()!=0) {
-					  pstmt.setInt(1, Integer.parseInt(data.get("idx")));			   
-			    	  pstmt.setString(2, data.get("title").replaceAll("네이버 영화", ""));
-			    	  pstmt.setString(3, data.get("movie_title"));
-			    	  pstmt.setString(4, data.get("movie_text"));
-			    	  pstmt.setString(5, data.get("extra_movie_text"));
-			    	  pstmt.setString(6, data.get("genre"));
-			    	  pstmt.setString(7, data.get("country"));
-			    	  pstmt.setString(8, data.get("html"));
-			    	  System.currentTimeMillis();
+					  		   
+			    	  pstmt.setString(1, data.get("date"));
+			    	  pstmt.setString(2, data.get("article_title"));
+			    	  pstmt.setString(3, data.get("article_text"));
+			    	  pstmt.setString(4, data.get("url"));
+			    	  pstmt.setString(5, data.get("article_url"));
 			    	  Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-			          
-			          
-			    	  pstmt.setString(9, timestamp.toString());
+			          pstmt.setString(6, timestamp.toString());
 			    	  
 		         int row =  pstmt.executeUpdate();
-		         //System.out.println(row); //1
+		         System.out.println(row); //1
 					 
 				 }
 					  
