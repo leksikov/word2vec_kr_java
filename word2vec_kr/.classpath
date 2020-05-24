@@ -2,12 +2,12 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry excluding="src/|libs/" kind="src" path=""/>
 	<classpathentry kind="src" path="libs"/>
 	<classpathentry kind="lib" path="C:/Users/lexik/Documents/GitHub/word2vec_kr_java/word2vec_kr/libs/jsoup-1.13.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/lexik/Documents/GitHub/word2vec_kr_java/word2vec_kr/libs/komoran-2.4-e.jar"/>
 	<classpathentry kind="lib" path="C:/Users/lexik/Documents/GitHub/word2vec_kr_java/word2vec_kr/libs/sqlite-jdbc-3.30.1.jar"/>
 	<classpathentry kind="lib" path="libs/gradle-wrapper.jar"/>
 	<classpathentry kind="lib" path="C:/Users/lexik/Documents/GitHub/word2vec_kr_java/word2vec_kr/libs/kkma-2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/lexik/Documents/GitHub/word2vec_kr_java/word2vec_kr/libs/open-korean-text-2.3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
