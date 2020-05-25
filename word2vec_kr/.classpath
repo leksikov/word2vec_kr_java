@@ -9,5 +9,7 @@
 	<classpathentry kind="lib" path="libs/gradle-wrapper.jar"/>
 	<classpathentry kind="lib" path="C:/Users/lexik/Documents/GitHub/word2vec_kr_java/word2vec_kr/libs/kkma-2.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/lexik/Documents/GitHub/word2vec_kr_java/word2vec_kr/libs/open-korean-text-2.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/lexik/Documents/GitHub/word2vec_kr_java/word2vec_kr/libs/scala-library-2.12.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/lexik/Documents/GitHub/word2vec_kr_java/word2vec_kr/libs/twitter-text-1.14.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

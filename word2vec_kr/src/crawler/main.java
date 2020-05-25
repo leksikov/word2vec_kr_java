@@ -12,20 +12,20 @@ public class main {
 		
 		for (int days_ago=0; days_ago <= 365*4; days_ago++) {
 			LocalDate date = LocalDate.now().minusDays(days_ago);
-			
-			for (int page = 1; page <= 50; page++) {
+			int page=1;
+			//for (int page = 1; page <= 50; page++) {
 				try {
 					new naverNewsCrawler().naverCrawler(date, page);
 						
 				}
 				catch (Exception e) {
 		            System.out.println(e.getMessage() +" " + days_ago +" " + page);
-		            Thread.sleep(10000);
+		            Thread.sleep(20000);
 		        }
 				Thread.sleep(1000);
 				
 				
-			}
+		//	}
 			
 
 		}
