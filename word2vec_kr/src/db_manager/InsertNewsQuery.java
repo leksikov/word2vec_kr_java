@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 
 public class InsertNewsQuery {
-
+	public String db_path = "C:\\sqlite\\db\\naver_news.db";
 	public InsertNewsQuery() {
 		// TODO Auto-generated constructor stub
 	}

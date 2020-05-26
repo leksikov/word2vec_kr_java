@@ -22,7 +22,7 @@ public class tokenizer {
 	
 	public ArrayList<String> getTokens(String text) {
 		CharSequence normalized = OpenKoreanTextProcessorJava.normalize(text);
-		System.out.println(normalized);
+		//System.out.println(normalized);
 		
 		// Tokenize
 		Seq<KoreanToken> tokens = OpenKoreanTextProcessorJava.tokenize(normalized);

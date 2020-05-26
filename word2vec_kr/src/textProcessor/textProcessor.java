@@ -36,7 +36,7 @@ public  String remove_word_duplicates(String string) {
     string = sbTemp.toString();
     
    
-    System.out.println(string);
+    //System.out.println(string);
     return string;
 	}
 

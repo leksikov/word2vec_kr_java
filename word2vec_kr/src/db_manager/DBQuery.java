@@ -6,21 +6,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class DBQuery {
-	public Connection conn = null;
-	public String qres;
+	public static Connection conn = null;
+	public static String qres;
+	static String db_path = "C:\\sqlite\\db\\naver_news.db";
 	
-	public DBQuery(String db_path, String sql) {
+	public DBQuery() {
 			
-			conn = connect(db_path);
-			
-			selectAll(conn, sql);
-			
+	
         
 	}
 	
-	public  Connection connect(String db_path) {
+	public static  Connection connect(String db_path) {
         // SQLite connection string
         String url = db_path;
         
@@ -38,25 +39,24 @@ public class DBQuery {
      * select all rows in the warehouses table
      * @return 
      */
-    public String selectAll(Connection conn,String sql){
+    public static  HashMap<Integer, String> selectQuery(String sql){
     	System.out.println("query");
         
-        
+    	HashMap<Integer,String> article_text_lst = new HashMap<Integer, String>();
+    	
         try (
+        		Connection conn = DBQuery.connect(db_path);
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
             
             // loop through the result set
             while (rs.next()) {
+            	Integer id = rs.getInt("id");
+            	qres =  rs.getString("article_text");
+            	System.out.println("here: s"+id);
+            	article_text_lst.put(id, qres);
             	
-            	qres = rs.getInt("idx") +  "," + 
-                        rs.getString("title") + "," +
-                        rs.getString("movie_title") + "," +
-                        rs.getString("movie_text") + "," +
-                        rs.getString("extra_movie_text") + "," +
-                        rs.getString("genre");
-            	
-                System.out.println(qres);
+              
             }
             conn.close();
         } catch (SQLException e) {
@@ -68,7 +68,7 @@ public class DBQuery {
 				e1.printStackTrace();
 			}
         }
-    return qres;
+    return article_text_lst;
     }
     
     public void insert(Connection conn, String name, double capacity) {
