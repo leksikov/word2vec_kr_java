@@ -41,18 +41,18 @@ public class insertTokenizedArticles {
 		String sql = "INSERT INTO naver_news_tokenized( id, article_tokens) VALUES(?,?)";
 		
         
-		System.out.println("Insertion");
+		
         
 		try (Connection conn = insertTokenizedArticles.connect(db_path);
         		
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 		
-			 if ( str.length()!=0 & str != null) {
+			 if (  str != null) {
 				  		   
 		    	  pstmt.setInt(1, id);
 		    	  pstmt.setString(2, str);
 		    	  int row =  pstmt.executeUpdate();
-	         System.out.println(row); //1
+	         //System.out.println(row); //1
 				 
 			 }
 				  

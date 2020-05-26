@@ -13,9 +13,9 @@ import org.openkoreantext.processor.tokenizer.KoreanTokenizer.KoreanToken;
 import scala.collection.Seq;
 
 
-public class tokenizer {
+public class Tokenizer {
 	ArrayList<String> tokenLst = new ArrayList<String>();
-	public tokenizer() {
+	public void tokenizer() {
 		
 		
 	}

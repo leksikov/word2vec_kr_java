@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 public class DBQuery {
@@ -40,7 +41,7 @@ public class DBQuery {
      * @return 
      */
     public static  HashMap<Integer, String> selectQuery(String sql){
-    	System.out.println("query");
+    	//System.out.println("query");
         
     	HashMap<Integer,String> article_text_lst = new HashMap<Integer, String>();
     	
@@ -53,7 +54,7 @@ public class DBQuery {
             while (rs.next()) {
             	Integer id = rs.getInt("id");
             	qres =  rs.getString("article_text");
-            	System.out.println("here: s"+id);
+            	//System.out.println("here: s"+id);
             	article_text_lst.put(id, qres);
             	
               
@@ -71,16 +72,43 @@ public class DBQuery {
     return article_text_lst;
     }
     
-    public void insert(Connection conn, String name, double capacity) {
-        String sql = "INSERT INTO warehouses(name,capacity) VALUES(?,?)";
-
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, name);
-            pstmt.setDouble(2, capacity);
-            pstmt.executeUpdate();
+    public static  HashMap<Integer, LinkedList<String>> selectQuery2(String sql){
+    	//System.out.println("query");
+    	HashMap<Integer, LinkedList<String>> article_text_lst = new HashMap<Integer, LinkedList<String>>();
+    	 
+        try (
+        		Connection conn = DBQuery.connect(db_path);
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+            
+            // loop through the result set
+            while (rs.next()) {
+            	Integer id = rs.getInt("id");
+            	qres =  rs.getString("article_text");
+            	String tokens = rs.getString("article_tokens");
+            	//System.out.println("here: s"+id);
+            	LinkedList<String> tuple = new LinkedList<String>();
+            	tuple.add(qres);
+            	tuple.add(tokens);
+            	article_text_lst.put(id, tuple);
+            	
+            	
+              
+            }
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            try {
+				conn.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
         }
+    return article_text_lst;
     }
+    
+    
+
 
 }
