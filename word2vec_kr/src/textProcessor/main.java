@@ -55,8 +55,7 @@ public class main {
 				
 		    }catch(Exception e) {
 		    	
-		    	System.out.println(e );
-		    	System.out.println( tuple);
+		    	
 		    	continue;
 		    }
 		    

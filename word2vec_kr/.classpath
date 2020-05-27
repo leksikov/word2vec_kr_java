@@ -12,5 +12,6 @@
 	<classpathentry kind="lib" path="C:/Users/lexik/Documents/GitHub/word2vec_kr_java/word2vec_kr/libs/scala-library-2.12.4.jar"/>
 	<classpathentry kind="lib" path="C:/Users/lexik/Documents/GitHub/word2vec_kr_java/word2vec_kr/libs/twitter-text-1.14.3.jar"/>
 	<classpathentry kind="lib" path="C:/Users/lexik/Documents/GitHub/word2vec_kr_java/word2vec_kr/libs/gson-2.8.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/lexik/Documents/GitHub/word2vec_kr_java/word2vec_kr/libs/httpserver.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
