@@ -31,7 +31,7 @@ public class main {
 	public static  void main(String[] args) throws IOException {
 		// new insertTokenizedIntoDB().insertTokenizedIntoDB(); To insert tokenized sentences into db
 		
-		break;
+	
 		
 		String sql = "SELECT DISTINCT A.id, A.article_text, B.article_tokens FROM naver_news as A LEFT JOIN naver_news_tokenized as B ON A.id = B.id LIMIT 1000;";
 				
@@ -103,9 +103,9 @@ public class main {
 	      
 	      HashMap<String, String> result = new  HashMap<String, String>();
 	      result.put("sent_count", Integer.toString(sent_count));
-	      result.put("token_count", Integer.toString(sent_count));
+	      result.put("token_count", Integer.toString(tokens_count));
 	      result.put("avg_word_size", Integer.toString(avg_word_size));
-	      result.put("sent_count", Integer.toString(sent_count) );
+	      
 	      result.put("token_size_distribution", token_size_distribution.toString());
 	      result.put("sentence_size_distribution", sentence_size_distribution.toString());
 	      
